@@ -49,9 +49,18 @@ const FilteredOutput = (props) => {
       setFilterData(loggerData);
     } else {
       if (logID) {
-        result = result.filter((ele) => {
-          return ele.logId === parseInt(logID);
+        var logIdArr = [];
+        result.filter((ele) => {
+          return logIdArr.push(ele.logId.toString());
         });
+        var logIdArr2 = [];
+        // eslint-disable-next-line
+        logIdArr.filter((id, index) => {
+          if (id.includes(logID)) {
+            return logIdArr2.push(result[index]);
+          }
+        });
+        result = logIdArr2;
       }
 
       if (actionType) {
